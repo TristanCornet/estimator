@@ -1,27 +1,4 @@
 <?php
-/*
-Créer l'algo qui permettra de calculer une estimation de temps par rapport à un jeu de données envoyées.
-
-Ouvre ce fichier dans ton navigateur, ou lance un serveur php avec la commande : "php -S localhost:8000 -t ." en étant placé dans ce dossier.
-
-Analyse le résultat attendu. Les contenus d'exemple seront automatiquement enlevés dès que tu fourniras des valeurs dans les tableaux `lines` et `additional`.
-
-Chaque entrée dans `lines` et `additional` devra avoir cette form : 
-
-    [
-        "name" => "Nom du dev",
-        "time" => "temps en minute", // => 340
-    ]
-
-Les temps sont exprimés en minutes.
-
-- "total_percentage" correspond au pourcentage à appliquer sur le total
-- "startup_time" correspond au temps nécessaire à la mise en place du projet. Ce temps de mise en place devra être en première ligne du tableau.
-
-Dans la partie "additional", il faudra ajouter des entrées pour les temps supplémentaires en fonction du type de design et type de projet, même si ces temps additionnels sont égal à "0". On ne veut pas ici le pourcentage de temps supplémentaire, mais le temps supplémentaire occasionné, en minutes.
-
-*/
-
 
 /**
  * Règles de gestion
@@ -85,29 +62,14 @@ $dataSentArray = [
         ]
     ]
 ];
+// fin des jeux de données de test
 
 
 /**
  * Algo
  */
 
-/* 
-Change l'index ici si tu veux tester avec un autre jeu de donnée du tableau ci-dessus.
-
-L'index "0" correspond à :
-[
-    'designType' => 'complex',
-    'projectType' => 'laravel_vuejs',
-    'genericDevelopments' => [
-        'homepage', 'editorial', 'blog', 'jobs'
-    ]
-],
-
-*/
 $dataSent = $dataSentArray[0];
-
-// -------------- Ton algo ici --------------
-
 
 $total = 0;
 $lines = [];
@@ -144,9 +106,8 @@ $total = round($total);
 
 // Return result object with total, lines, and additional arrays~
 $result = ['total' => $total, 'lines' => $lines, 'additional' => $additional];
+// fin de l'algo
 
-// -------------- Fin de ton algo ------------
 
-// Ne pas toucher ci-dessous
 include('functions.php');
 display_result($result);
