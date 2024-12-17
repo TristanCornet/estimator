@@ -1,0 +1,41 @@
+services:
+  api:
+    build: 
+      context: ./backend
+    container_name: api
+    depends_on:
+      - mysql
+    ports:
+      - "8090:80"
+      - "8005:8000"
+    volumes:
+      - ./backend:/var/www/html
+  mysql:
+    container_name: database
+    image: mysql:8.0
+    ports:
+      - "4306:3306"
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=root
+  adminer:
+    container_name: adminer
+    image: adminer:4.8.1
+    depends_on:
+      - mysql
+    ports:
+      - "8085:8080"
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "8080:5173"
+    environment:
+      - VITE_URL_API=http://localhost:8090/

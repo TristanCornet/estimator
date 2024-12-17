@@ -1,0 +1,42 @@
+@startuml Estimato'r
+!theme vibrant
+
+entity EstimateField {
+  *id
+  --
+  *name
+  *slug
+  *type
+}
+
+entity EstimatePresetValue {
+  *id
+  --
+  *label
+  *value
+  time
+  startup_time
+  total_percentage
+  *estimate_field_id
+}
+
+entity Estimate {
+  *id
+  --
+  *name
+  *total_time
+}
+
+entity EstimateLine {
+  *id
+  --
+  *label
+  *time
+  *type
+  *estimate_id
+}
+
+Estimate "Contains (0, N)" -- "Line of (1, 1)" EstimateLine
+EstimateField "Proposes (0, N)" -- "Option for (1, 1)" EstimatePresetValue
+
+@enduml
